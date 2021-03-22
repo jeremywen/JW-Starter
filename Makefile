@@ -11,16 +11,12 @@ FLAGS = \
 	-Ilib/oscpack \
 
 SOURCES = \
-	$(wildcard lib/oscpack/ip/*.cpp) \
-	$(wildcard lib/oscpack/osc/*.cpp) \
 	$(wildcard src/*.cpp) \
 
 MACHINE = $(shell $(CC) -dumpmachine)
 ifneq (, $(findstring mingw, $(MACHINE)))
-	SOURCES += $(wildcard lib/oscpack/ip/win32/*.cpp) 
 	LDFLAGS += -lws2_32 -lwinmm
 else
-	SOURCES += $(wildcard lib/oscpack/ip/posix/*.cpp) 
 endif
 
 FLAGS := $(filter-out -MMD,$(FLAGS))
